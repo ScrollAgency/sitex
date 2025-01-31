@@ -9,16 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@plasmicapp/loader-nextjs": "^1.0.410",
+    "@plasmicapp/react-web": "^0.2.361",
+    "@ScrollAgency/plasmic-library": "^0.0.5",
+    "autoprefixer": "^10.4.20",
+    "next": "^14.2.23",
+    "next-utils": "^0.2.1",
+    "plasmic-supabase": "^0.4.1",
+    "postcss": "^8.5.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.20"
+    "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.20"
+    "eslint-config-next": "14.2.20",
+    "typescript": "^5"
   }
 }

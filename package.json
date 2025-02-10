@@ -11,7 +11,7 @@
   "dependencies": {
     "@plasmicapp/loader-nextjs": "^1.0.410",
     "@plasmicapp/react-web": "^0.2.361",
-    "@ScrollAgency/plasmic-library": "^0.0.5",
+    "@ScrollAgency/plasmic-library": "^0.0.7",
     "autoprefixer": "^10.4.20",
     "next": "^14.2.23",
     "next-utils": "^0.2.1",

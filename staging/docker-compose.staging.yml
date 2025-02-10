@@ -1,0 +1,20 @@
+name: sitex-staging
+services:
+  app:
+    image: scrollagency/sitex:staging
+    container_name: sitex-staging
+    ports:
+      - "29004:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+    networks:
+      - sitex-network
+    restart: unless-stopped
+
+networks:
+  sitex-network:
+    name: sitex-network
+    driver: bridge
+    external: true

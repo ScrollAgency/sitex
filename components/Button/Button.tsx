@@ -8,15 +8,15 @@ export type HTMLButtonProps = Pick<
   "onClick" | "disabled">;
 
 export interface ButtonProps extends HTMLButtonProps {
-  label?: string;
-  icon?: "start" | "end" | "only" | "none";
-  destructive?: boolean;
-  hierarchy?: "primary" | "secondary";
-  size?: "small" | "large";
-  state?: "default" | "hover" | "focused" | "disabled";
-  disabled?: boolean;
-  iconImage?: string;
-  className?: string;
+  label?: string,
+  icon?: "start" | "end" | "only" | "none",
+  destructive?: boolean,
+  hierarchy?: "primary" | "secondary",
+  size?: "small" | "large",
+  state?: "default" | "hover" | "focused" | "disabled",
+  disabled?: boolean,
+  iconImage?: string,
+  className?: string
 }
 
 const Button = ({
@@ -38,6 +38,10 @@ const Button = ({
         destructive: {
           true: "bg-red-500 text-white",
           false: "bg-blue-500 text-white",
+        },
+        disabled: {
+          true: "bg-slate-300",
+          false: ""
         },
         hierarchy: {
           primary: "bg-blue-500 text-white",
@@ -74,7 +78,7 @@ const Button = ({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        variants({ destructive, hierarchy, size, state }),
+        variants({ destructive, disabled, hierarchy, size, state }),
         className || ""
       )}
     >

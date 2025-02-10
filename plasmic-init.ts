@@ -1,5 +1,5 @@
 import * as PlasmicLibrary from "@ScrollAgency/plasmic-library";
-import { getComponentProps, ComponentMeta, mapPropType } from "@ScrollAgency/plasmic-library";
+import { getComponentProps, type ComponentMeta, mapPropType } from "@ScrollAgency/plasmic-library";
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 import { 
   SupabaseProvider, 

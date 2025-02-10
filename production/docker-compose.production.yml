@@ -1,10 +1,10 @@
-name: sitex-loader-host
+name: sitex-production
 services:
   app:
-    image: scrollagency/sitex:loader-host
-    container_name: sitex-loader-host
+    image: scrollagency/sitex:production
+    container_name: sitex-production
     ports:
-      - "29006:3000"
+      - "29005:3000"
     env_file:
       - .env
     environment:

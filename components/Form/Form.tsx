@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode, cloneElement, isValidElement } from "react";
+import React, { ReactNode } from "react";
 
 interface FormProps {
   children: ReactNode,
@@ -6,7 +6,6 @@ interface FormProps {
 }
 
 const Form: React.FC<FormProps> = ({ children, className }) => {    
-  const [isFormValid, setIsFormValid] = useState(false);
 
   return (
     <form className={ className }>

@@ -1,9 +1,8 @@
-import React, { PropsWithChildren, useState, useEffect, useCallback, useImperativeHandle } from "react";
+import React, { PropsWithChildren, useState, useEffect, useCallback } from "react";
 import variants from "./variants";
 import { cn } from "@/lib/utils";
 
 export interface TextInputProps extends PropsWithChildren {
-  name: string;
   nameInErrorMessages?: string,
   type?: "text" | "password" | "tel" | "email",
   placeholder?: string,
@@ -26,7 +25,6 @@ export interface TextInputProps extends PropsWithChildren {
 
 const TextInput: React.FC<TextInputProps> = 
 ({
-  name = "input",
   type = "text",
   placeholder = "Placeholder",
   initialValue = "",

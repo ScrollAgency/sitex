@@ -10,7 +10,7 @@ import {
   SupabaseUppyUploaderMeta,
   SupabaseStorageGetSignedUrl,
   SupabaseStorageGetSignedUrlMeta,
-} from "plasmic-supabase"
+} from "plasmic-supabase";
 
 export const PLASMIC = initPlasmicLoader({
   projects: [
@@ -56,11 +56,6 @@ PLASMIC.registerComponent(SupabaseProvider, SupabaseProviderMeta);
 PLASMIC.registerComponent(SupabaseUppyUploader, SupabaseUppyUploaderMeta);
 PLASMIC.registerComponent(SupabaseStorageGetSignedUrl, SupabaseStorageGetSignedUrlMeta);
 
-// Import des composants locauximport { AuthForm } from "./components/AuthForm";
-import ButtonScroll from "./components/Button";
-import PasswordCheckIndicator from './components/passwordCheckIndicator/passwordCheckIndicator';
-// import PlasmicSupabaseForm from "./components/PlasmicSupabaseForm";
-
 // Enregistrement du contexte global Supabase
 PLASMIC.registerGlobalContext(SupabaseUserGlobalContext, SupabaseUserGlobalContextMeta);
 
@@ -69,8 +64,21 @@ PLASMIC.registerComponent(SupabaseProvider, SupabaseProviderMeta);
 PLASMIC.registerComponent(SupabaseUppyUploader, SupabaseUppyUploaderMeta);
 PLASMIC.registerComponent(SupabaseStorageGetSignedUrl, SupabaseStorageGetSignedUrlMeta);
 
-PLASMIC.registerComponent(ButtonScroll, {
-  name: 'ButtonScroll',
+// code components
+
+import Button from "./components/Button/Button";
+import PasswordCheckIndicator from './components/passwordCheckIndicator/passwordCheckIndicator';
+import TextInput from './components/TextInput/TextInput';
+import { TextInputProps } from './components/TextInput/TextInput';
+import Form from './components/Form/Form';
+import CodeComponent from './components/CodeComponent';
+
+// General
+
+PLASMIC.registerComponent(Button, {
+  name: 'CodeButton',
+  section: 'Basic elements',
+  displayName: "Button (code component)",
   props: {
     label: "string",
     icon: {
@@ -101,14 +109,218 @@ PLASMIC.registerComponent(ButtonScroll, {
         },
       ],
     },
+    className: {
+      type: 'class',
+      selectors: [
+        {
+          selector: ':hover',
+          label: 'Hovered'
+        },
+        {
+          selector: ':active',
+          label: 'Pressed'
+        },
+        {
+          selector: ':disabled',
+          label: 'Disabled'
+        }
+      ]
+    }
+  }
+});
+
+// Form 
+
+PLASMIC.registerComponent(Form, {
+  name: "CodeForm",
+  section: "Form elements",
+  displayName: "Form (code component)",
+  props: {
+    children: {
+      type: 'slot'
+    }
+  },
+  actions: [
+    {
+      type: "button-action",
+      label: "Append new CodeTextInput",
+      onClick: ({ studioOps }) => {
+        studioOps.appendToSlot(
+          {
+            type: 'vbox',
+            children: [
+              {
+                type: 'text',
+                value: 'Label',
+              },
+              {
+                type: 'component',
+                name: 'CodeTextInput'
+              }
+            ],
+            styles: {
+              display: "flex",
+              flexDirection: "column",
+              gap: "8px",
+              padding: "0px"
+            },
+          },
+          'children'
+        );
+      },
+    },
+  ],  
+
+});
+
+PLASMIC.registerComponent(TextInput, {
+  name: 'CodeTextInput',
+  section: "Form elements",
+  displayName: "Text input (code component)",
+  thumbnailUrl: "https://wrtucmaotoeqjhalofcv.supabase.co/storage/v1/object/public/publicLogos//blue_magnifying_glass.svg",
+  props: {
+    nameInErrorMessages: 'string',
+    type: {
+      type: 'choice',
+      options: ['text', 'password', 'tel', 'email']
+    },
+    placeholder: 'string',
+    prefixedText: 'string',
+    destructive: 'boolean',
+    disabled: 'boolean',
+    iconUrl: 'string',
+    inputClassName: {
+      type: 'class',
+      selectors: [
+        {
+          selector: ':hover',
+          label: 'Hovered'
+        },
+        {
+          selector: ':focus',
+          label: 'Focused'
+        }
+      ]
+    },
+    errorTextClassName: {
+      type: 'class'
+    },
+    initialValue: 'string',
+    required: 'boolean',
+    minLength: 'number',
+    maxLength: 'number',
+    customValidation: 'string',
+    customErrorMessage: {
+      type: 'string',
+      hidden: (props: TextInputProps) => !props.customValidation,
+    },
+    onTextChange: {
+      type: "eventHandler",
+      description: "Fonction appelée lors du changement de saisie.",
+      argTypes: [
+        {
+          name: "value",
+          type: "string",
+        },
+      ],
+    },
+    onValidationChange: {
+      type: "eventHandler",
+      description: "Fonction appelée lorsque l'input est valide.",
+      argTypes: [
+        {
+          name: "value",
+          type: "string",
+        },
+      ],
+    }
+  },
+  states: {
+    value: {
+      type: 'writable',
+      variableType: 'text',
+      valueProp: 'initialValue',
+      onChangeProp: 'onTextChange'
+    },
+    isInputValid: {
+      type: 'readonly',
+      variableType: 'boolean',
+      onChangeProp: 'onValidationChange'
+    }
   }
 });
 
 PLASMIC.registerComponent(PasswordCheckIndicator, {
-  name: 'PasswordCheckIndicator',
+  name: 'CodePasswordCheckIndicator',
+  section: 'Form elements',
+  displayName: "Password validation indicator (code component)",
+  thumbnailUrl: 'https://wrtucmaotoeqjhalofcv.supabase.co/storage/v1/object/public/publicLogos//CheckCircle.svg',
   props: {
-    numberOfChecks: 'number',
-    colorUnchecked: 'string',
-    colorChecked: 'string', 
+    numberOfChecksToMake: {
+      type: 'number',
+      displayName: 'Number of slots to display',
+      description: 'The number of checks that will be made on the password (length, contains a digit...) (by default 4)',
+      defaultValueHint: 4
+    },
+    numberOfChecksValidated: {
+      type: 'number',
+      displayName: 'Number of checks validated',
+      description: 'The number of checks realized on the current password entry of the user',
+      defaultValueHint: 0
+    },
+    colorUnchecked: {
+      type: 'color',
+      displayName: 'Color of the unchecked slots',
+      defaultValueHint: '#EFEFEF'
+    },
+    colorChecked: {
+      type: 'color',
+      displayName: 'Color of the unchecked slots',
+      defaultValueHint: '#800080'
+    }
   },
+  templates: {
+    Funky: {
+      props: {
+        numberOfChecksToMake: 6,
+        numberOfChecksValidated: 2,
+        colorUnchecked: "#FD3F92",
+        colorChecked: "#ffff00"
+      }
+    }
+  },
+  defaultStyles: {
+    width: '100%'
+  }
 });
+
+// Testing things 
+
+PLASMIC.registerComponent(CodeComponent, {
+  name: 'CodeComponent',
+  props: {
+    children: 'slot'
+  },
+  actions: [
+    {
+      // Creates a button that, on click, will append a new
+      // image element to the `children` slot of this
+      // component instance.
+      type: 'button-action',
+      label: 'Append new element',
+      onClick: ({ studioOps }) => {
+        studioOps.appendToSlot(
+          {
+            type: 'img',
+            src: '',
+            styles: {
+              maxWidth: '100%'
+            }
+          },
+          'children'
+        );
+      }
+    }
+  ]
+});
+

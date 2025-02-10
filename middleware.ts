@@ -6,7 +6,8 @@ const loginPage = '/login'
 const publicRoutes = [
     '/',
     '/login',
-    '/plasmic-host'
+    '/plasmic-host',
+    '/testing'
 ]
 
 export async function middleware(request: NextRequest) {

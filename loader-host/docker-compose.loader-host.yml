@@ -1,10 +1,10 @@
-name: sitex-staging
+name: sitex-loader-host
 services:
   app:
-    image: scrollagency/sitex:staging
-    container_name: sitex-staging
+    image: scrollagency/sitex:loader-host
+    container_name: sitex-loader-host
     ports:
-      - "29004:3000"
+      - "29006:3000"
     env_file:
       - .env
     environment:

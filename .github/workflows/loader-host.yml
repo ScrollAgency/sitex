@@ -1,9 +1,8 @@
-name: Deploy to Staging
-    
+name: Deploy to Loader-host
 on:
   push:
     branches:
-      - staging
+      - loader-host
 
 jobs:
   build-and-deploy:
@@ -50,11 +49,11 @@ jobs:
         with:
           push: true
           context: ./
-          file: ./staging/Dockerfile
+          file: ./loader-host/Dockerfile
           build-args: |
             NODE_AUTH_TOKEN=${{ secrets.PLASMICLIBRARY_TOKEN }}
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:staging
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:loader-host
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:${{ github.sha }}
           labels: |
             maintainer=${{ secrets.DOCKERHUB_USERNAME }}
@@ -63,7 +62,7 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:cache
           cache-to: type=inline
 
-      - name: Login to Docker Hub on Staging Server
+      - name: Login to Docker Hub on loader-host Server
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@57.129.138.68 "
             echo $DOCKERHUB_TOKEN | docker login -u $DOCKERHUB_USERNAME --password-stdin
@@ -72,12 +71,12 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           
-      - name: Deploy to Staging
+      - name: Deploy to loader-host
         run: |
           ssh  -o StrictHostKeyChecking=no -T ubuntu@57.129.138.68 "
-            cd sitex/staging &&
-            docker compose -f docker-compose.staging.yml pull &&
-            docker compose -f docker-compose.staging.yml up -d
+            cd sitex/loader-host &&
+            docker compose -f docker-compose.loader-host.yml pull &&
+            docker compose -f docker-compose.loader-host.yml up -d
           "
 
     concurrency:

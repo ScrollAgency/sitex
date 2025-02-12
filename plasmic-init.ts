@@ -15,15 +15,11 @@ import {
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
-      id: "93rttWLzkTrq7fZVPgTkKS",
-      token: "0MdJSC8Xelx7eAkHsVEVsype0Kuhvx7mxHVd3tint9cv7Lg7eODL6k9HHg9uiyeb65jM1W87irqgqSjCYE5Q",
+      id: process.env.NEXT_PUBLIC_PLASMIC_PROJECT_ID!,
+      token: process.env.NEXT_PUBLIC_PLASMIC_PROJECT_TOKEN!,
     },
   ],
 
-  // By default Plasmic will use the last published version of your project.
-  // For development, you can set preview to true, which will use the unpublished
-  // project, allowing you to see your designs without publishing.  Please
-  // only use this for development, as this is significantly slower.
   preview: true,
 });
 

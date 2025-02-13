@@ -1,15 +1,142 @@
-name: Deploy to Staging
-    
+name: Test & Deploy to Staging
+
 on:
   push:
     branches:
       - staging
 
 jobs:
-  build-and-deploy:
+  setup:
+    name: Setup Environment
     runs-on: ubuntu-latest
-
     steps:
+
+      # Étape 1 : Cloner le code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 2 : Configurer Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      # Étape 3 : Installer les dépendances
+      - name: Install dependencies
+        run: |
+          cd tests
+          npm ci
+
+      # Étape 4 : Création du cache npm
+      - name: Cache NPM dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+              
+      # Étape 4 : Créer une archive des dépendances NPM
+      - name: Create archive of node_modules
+        run: |
+          tar -czf node_modules.tar.gz ./tests/node_modules
+
+      # Étape 5 : Sauvegarder l'archive comme artifact
+      - name: Upload node_modules as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-modules
+          path: node_modules.tar.gz
+
+  jest-tests:
+    name: Jest Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+
+      # Étape 6 : Cloner le code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 7 : Restaurer les node_modules
+      - name: Restore node_modules
+        uses: actions/download-artifact@v3
+        with:
+          name: node-modules
+      
+      # Étape 8 : Extraire l'archive
+      - name: Extract node_modules
+        run: |
+          tar -xzf node_modules.tar.gz
+
+      # Étape 8 : Exécuter les tests Jest
+      - name: Run Jest tests
+        run: |
+          cd tests
+          npm test
+
+      # Étape 9 : Générer le rapport Jest
+      - name: Generate Jest Report
+        run: |
+          cd tests
+          npm test -- --coverage --outputFile=jest-report.json
+
+      - name: Upload Jest Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: jest-report
+          path: test/jest-report.json
+
+  playwright-tests:
+    name: Playwright Tests
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+
+      # Étape 10 : Cloner le code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Étape 11 : Restaurer les node_modules
+      - name: Restore node_modules
+        uses: actions/download-artifact@v3
+        with:
+          name: node-modules
+
+      # Étape 11bis : Extraire l'archive
+      - name: Extract node_modules
+        run: |
+          tar -xzf node_modules.tar.gz
+
+      # Étape 12 : Installer les navigateurs Playwright
+      - name: Install Playwright Browsers
+        run: npx playwright install
+
+      # Étape 12 : Exécuter les tests Playwright
+      - name: Run Playwright tests
+        run: |
+          cd tests
+          npx playwright test
+
+      # Étape 13 : Générer le rapport Playwright
+      - name: Generate Playwright Report
+        run: |
+          cd tests
+          npx playwright test --reporter=json
+
+      - name: Upload Playwright Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: playwright-report
+          path: tests/playwright-report.json
+
+  deploy:
+    name: Deploy to staging
+    runs-on: ubuntu-latest
+    needs: [jest-tests, playwright-tests]
+    steps:
+
+      # Étape 14 : Cloner le code
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -21,6 +148,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.PLASMICLIBRARY_TOKEN }}
 
+      # Étape 15 : Configurer SSH pour le serveur
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
@@ -28,24 +156,29 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts  
 
+      # Étape 16 : Obtenir la date
       - name: Get current date and set app name
         run: |
           echo "date=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
           echo "myapp=sitex" >> $GITHUB_ENV
           echo "environnement=staging" >> $GITHUB_ENV
 
+      # Étape 17 : Configurer QEMU pour la construction multiplateforme
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
+      # Étape 18 : Configurer Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      # Étape 19 : Se connecter à Docker Hub
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      # Étape 20 : Construire et pousser l'image Docker pour la staging
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
@@ -66,6 +199,7 @@ jobs:
           cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:cache
           cache-to: type=inline
 
+      # Étape 21 : Connexion à Docker Hub sur le serveur staging
       - name: Login to Docker Hub on Staging Server
         run: |
           ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} "
@@ -75,12 +209,29 @@ jobs:
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           
+      # Étape 22 : Déployer sur le serveur staging
       - name: Deploy to Staging
         run: |
           ssh  -o StrictHostKeyChecking=no -T ubuntu@${{ secrets.SERVER_IP }} "
             cd sitex/staging &&
             docker compose -f docker-compose.staging.yml pull &&
             docker compose -f docker-compose.staging.yml up -d
+          "
+
+      # Étape 24 : Nettoyer le serveur Docker
+      - name: Clean up Docker on staging Server
+        run: |
+          ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.SERVER_IP }} "
+            echo 'Starting Docker cleanup...' &&
+            echo 'Before cleanup:' &&
+            df -h &&
+            docker system prune -a --force &&
+            docker image prune -a --force &&
+            docker volume prune --force &&
+            docker network prune --force &&
+            echo 'After cleanup:' &&
+            df -h &&
+            echo 'Docker cleanup completed successfully.'
           "
 
     concurrency:

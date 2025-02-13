@@ -15,15 +15,11 @@ import {
 export const PLASMIC = initPlasmicLoader({
   projects: [
     {
-      id: "93rttWLzkTrq7fZVPgTkKS",
-      token: "0MdJSC8Xelx7eAkHsVEVsype0Kuhvx7mxHVd3tint9cv7Lg7eODL6k9HHg9uiyeb65jM1W87irqgqSjCYE5Q",
+      id: process.env.NEXT_PUBLIC_PLASMIC_PROJECT_ID!,
+      token: process.env.NEXT_PUBLIC_PLASMIC_PROJECT_TOKEN!,
     },
   ],
 
-  // By default Plasmic will use the last published version of your project.
-  // For development, you can set preview to true, which will use the unpublished
-  // project, allowing you to see your designs without publishing.  Please
-  // only use this for development, as this is significantly slower.
   preview: true,
 });
 
@@ -48,14 +44,6 @@ function registerComponent(componentName: string) {
 // Enregistrement des composants dynamiques
 Object.keys(PlasmicLibrary.components).forEach(registerComponent);
 
-//Register global context
-PLASMIC.registerGlobalContext(SupabaseUserGlobalContext, SupabaseUserGlobalContextMeta)
-
-//Register components
-PLASMIC.registerComponent(SupabaseProvider, SupabaseProviderMeta);
-PLASMIC.registerComponent(SupabaseUppyUploader, SupabaseUppyUploaderMeta);
-PLASMIC.registerComponent(SupabaseStorageGetSignedUrl, SupabaseStorageGetSignedUrlMeta);
-
 // Enregistrement du contexte global Supabase
 PLASMIC.registerGlobalContext(SupabaseUserGlobalContext, SupabaseUserGlobalContextMeta);
 
@@ -65,7 +53,6 @@ PLASMIC.registerComponent(SupabaseUppyUploader, SupabaseUppyUploaderMeta);
 PLASMIC.registerComponent(SupabaseStorageGetSignedUrl, SupabaseStorageGetSignedUrlMeta);
 
 // code components
-
 import Button from "./components/Button/Button";
 import PasswordCheckIndicator from './components/passwordCheckIndicator/passwordCheckIndicator';
 import TextInput from './components/TextInput/TextInput';
@@ -74,7 +61,6 @@ import Form from './components/Form/Form';
 import CodeComponent from './components/CodeComponent';
 
 // General
-
 PLASMIC.registerComponent(Button, {
   name: 'CodeButton',
   section: 'Basic elements',

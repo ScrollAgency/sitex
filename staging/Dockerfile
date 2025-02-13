@@ -22,7 +22,7 @@ RUN echo "@ScrollAgency:registry=https://npm.pkg.github.com/" > .npmrc && \
 RUN npm rebuild
 
 # Installe les dépendances
-RUN npm ci
+RUN npm install
 RUN npm cache clean --force
 
 

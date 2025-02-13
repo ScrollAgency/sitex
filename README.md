@@ -3,4 +3,4 @@
 # Sitex
 ![Statut](https://github.com/ScrollAgency/sitex/actions/workflows/loader-host.yml/badge.svg)
 ![Statut](https://github.com/ScrollAgency/sitex/actions/workflows/staging.yml/badge.svg)
-![Statut](https://github.com//ScrollAgency/sitex/actions/workflows/production.yml/badge.
+![Statut](https://github.com/ScrollAgency/sitex/actions/workflows/production.yml/badge.svg)

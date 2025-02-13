@@ -53,6 +53,8 @@ jobs:
           file: ./${{ env.environnement }}/Dockerfile
           build-args: |
             NODE_AUTH_TOKEN=${{ secrets.PLASMICLIBRARY_TOKEN }}
+            NEXT_PUBLIC_PLASMIC_PROJECT_ID=${{ secrets.NEXT_PUBLIC_PLASMIC_PROJECT_ID }}
+            NEXT_PUBLIC_PLASMIC_PROJECT_TOKEN=${{ secrets.NEXT_PUBLIC_PLASMIC_PROJECT_TOKEN }}
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:${{ env.environnement }}
             ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.myapp }}:${{ github.sha }}

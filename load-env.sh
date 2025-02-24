@@ -6,7 +6,7 @@ if [[ "$BRANCH" == "staging" ]]; then
   cp .env.staging .env
 elif [[ "$BRANCH" == "production" ]]; then
   cp .env.production .env
-elif [[ "$BRANCH" == "local-votrenom" ]]; then
+elif [[ "$BRANCH" == "local-gael" ]]; then
   cp .env.local-gael .env
 fi
 

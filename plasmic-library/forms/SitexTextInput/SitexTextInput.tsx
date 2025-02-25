@@ -1,4 +1,5 @@
-import type React from "react";
+// biome-ignore lint/style/useImportType: <explanation>
+import React from "react";
 import { type PropsWithChildren, useState, useEffect, useCallback } from "react"
 import variants from "./variants";
 import { cn } from "@/lib/utils";

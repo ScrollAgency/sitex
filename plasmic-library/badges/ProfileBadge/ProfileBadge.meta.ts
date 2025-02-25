@@ -33,7 +33,7 @@ const ProfileBadgeMeta = {
         description: "Forme de l'avatar.",
       },
     },
-    importPath: "./components/profile/ProfileBadge", // Chemin vers ton composant
+    importPath: "./components/badges/ProfileBadge/ProfileBadge", // Chemin vers ton composant
   };
   
   export default ProfileBadgeMeta;

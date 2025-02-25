@@ -1,3 +1,4 @@
+import * as React from "react";
 import { cn } from '@/lib/utils';
 
 export interface PasswordCheckIndicatorProps {
@@ -16,7 +17,8 @@ const PasswordCheckIndicator = ({
   className
 }: PasswordCheckIndicatorProps) => {
   return (
-    <div className={cn("flex flex-row gap-2 pt-2 pb-2", className!)}>
+    <div className={cn("flex flex-row gap-2 pt-2 pb-2", className || "")}>
+
       {[...Array(numberOfChecksToMake)].map((_, index) => (
         <div
           key={index}

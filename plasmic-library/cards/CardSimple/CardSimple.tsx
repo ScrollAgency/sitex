@@ -17,7 +17,7 @@ function CardSimple_(props: CardSimpleProps, ref: HTMLElementRefOf<"div">) {
   const { className, title, color } = props;
 
   return (
-    <div className={`${styles.cardComplex} ${className}`} ref={ref}>
+    <div className={`${styles.cardSimple} ${className}`} ref={ref}>
       <div className={styles.text} style={{ color }}>
         {title}
       </div>

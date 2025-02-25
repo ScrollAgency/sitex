@@ -1,5 +1,3 @@
-"use client"; // Assure que le composant est rendu côté client
-
 import * as React from "react";
 import { Card, CardHeader, CardBody, CardFooter, Image, Button } from "@heroui/react";
 import type { HTMLElementRefOf } from "@plasmicapp/react-web";

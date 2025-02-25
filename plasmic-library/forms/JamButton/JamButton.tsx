@@ -1,7 +1,7 @@
 // biome-ignore lint/style/useImportType: <explanation>
 import * as React from "react";
 import {
-  ButtonHTMLAttributes,
+  type ButtonHTMLAttributes,
   forwardRef,
   useImperativeHandle,
   useRef,

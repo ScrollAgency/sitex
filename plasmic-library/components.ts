@@ -33,9 +33,6 @@ export { default as TextInputMeta } from "./forms/TextInput/TextInput.meta";
 //       JamButton
 export { default as JamButton } from "./forms/JamButton/JamButton";
 export { default as JamButtonMeta } from "./forms/JamButton/JamButton.meta";
-//       ButtonApple
-//export { default as ButtonApple } from "./forms/ButtonApple/ButtonApple";
-//export { default as ButtonAppleMeta } from "./forms/ButtonApple/ButtonApple.meta";
 //       JamInputText
 export { default as JamTextInput } from "./forms/JamTextInput/JamTextInput";
 export { default as JamTextInputMeta } from "./forms/JamTextInput/JamTextInput.meta";

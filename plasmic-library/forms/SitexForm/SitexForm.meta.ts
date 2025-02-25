@@ -13,7 +13,7 @@ const SitexFormMeta = {
         {
           type: "button-action",
           label: "Append new CodeTextInput",
-          onClick: ({ studioOps }) => {
+          onClick: ({ studioOps }: { studioOps: any }) => {
             studioOps.appendToSlot(
               {
                 type: 'vbox',

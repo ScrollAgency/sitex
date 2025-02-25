@@ -176,7 +176,9 @@ const JamInputText = ({
         )}
       </div>
       <p className="text-black text-sm font-normal flex gap-1 items-center">
-        {destructive && <Icons.error />}
+        {
+          destructive //&& <Icons.error />
+        }
         {hint && (
           <span className={`flex-1 text-base ${destructive && "text-error-700"}`}>
             {hint}

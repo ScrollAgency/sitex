@@ -2,6 +2,9 @@
 //       JamBadge
 export { default as JamBadge } from "./badges/JamBadge/JamBadge";
 export { default as JamBadgeMeta } from "./badges/JamBadge/JamBadge.meta";
+//       ProfileBadge
+export { default as ProfileBadge } from "./badges/ProfileBadge/ProfileBadge";
+export { default as ProfileBadgeMeta } from "./badges/ProfileBadge/ProfileBadge.meta";
 
 // Cards
 //       CardSimple
@@ -10,6 +13,9 @@ export { default as CardSimpleMeta } from "./cards/CardSimple/CardSimple.meta";
 //       CardComplex
 export { default as CardComplex } from "./cards/CardComplex/CardComplex";
 export { default as CardComplexMeta } from "./cards/CardComplex/CardComplex.meta";
+//       HeroCard
+export { default as HeroCard } from "./cards/HeroCard/HeroCard";
+export { default as HeroCardMeta } from "./cards/HeroCard/HeroCard.meta";
 
 // Forms
 //       Checkbox

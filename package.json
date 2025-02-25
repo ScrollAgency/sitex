@@ -10,9 +10,10 @@
     "library": "./manage-library.sh"
   },
   "dependencies": {
+    "@heroui/react": "^2.7.2",
     "@plasmicapp/loader-nextjs": "^1.0.415",
     "@plasmicapp/react-web": "^0.2.374",
-    "@ScrollAgency/plasmic-library": "^0.4.3",
+    "@ScrollAgency/plasmic-library": "^0.4.5",
     "autoprefixer": "^10.4.20",
     "next": "^14.2.23",
     "next-utils": "^0.2.1",

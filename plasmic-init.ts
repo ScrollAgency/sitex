@@ -1,5 +1,4 @@
-import * as PlasmicLibrary from "@ScrollAgency/plasmic-library";
-import { getComponentProps, type ComponentMeta, mapPropType } from "@ScrollAgency/plasmic-library";
+import * as PlasmicLibrary from "./plasmic-library/components"
 import { initPlasmicLoader } from "@plasmicapp/loader-nextjs";
 import { 
   SupabaseProvider, 
@@ -23,26 +22,20 @@ export const PLASMIC = initPlasmicLoader({
   preview: true,
 });
 
-// Fonction pour enregistrer un composant dans Plasmic
-function registerComponent(componentName: string) {
-  const component = PlasmicLibrary.components[componentName];
-  const meta = PlasmicLibrary.componentsMeta.find((m) => m.name === componentName) as ComponentMeta;
-
-  if (!component || !meta) {
-    console.error(`Impossible d'enregistrer ${componentName}. Métadonnées ou composant manquant.`);
-    return;
+// Fonction pour enregistrer automatiquement les composants de plasmic library
+function registerComponents(library) {
+  for (const key of Object.keys(library)) {
+    if (!key.includes("Meta")) {
+      const component = library[key];
+      const metaKey = `${key}Meta`;
+      const meta = library[metaKey];
+      if (meta) {
+        PLASMIC.registerComponent(component, meta);
+      }
+    }
   }
-
-  const props = getComponentProps(meta);
-  PLASMIC.registerComponent(component, {
-    name: componentName,
-    props,
-    section: meta.section || "Scroll components",
-  });
 }
-
-// Enregistrement des composants dynamiques
-Object.keys(PlasmicLibrary.components).forEach(registerComponent);
+registerComponents(PlasmicLibrary);
 
 //Register global context
 PLASMIC.registerGlobalContext(SupabaseUserGlobalContext, SupabaseUserGlobalContextMeta)

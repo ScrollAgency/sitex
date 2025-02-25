@@ -13,7 +13,7 @@
     "@heroui/react": "^2.7.2",
     "@plasmicapp/loader-nextjs": "^1.0.415",
     "@plasmicapp/react-web": "^0.2.374",
-    "@ScrollAgency/plasmic-library": "^0.4.5",
+    "@ScrollAgency/plasmic-library": "^0.4.7",
     "autoprefixer": "^10.4.20",
     "next": "^14.2.23",
     "next-utils": "^0.2.1",
@@ -29,6 +29,7 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.20",
+    "null-loader": "^4.0.1",
     "typescript": "^5"
   }
 }

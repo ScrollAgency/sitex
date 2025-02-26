@@ -18,11 +18,10 @@ export const PLASMIC = initPlasmicLoader({
       token: process.env.NEXT_PUBLIC_PLASMIC_PROJECT_TOKEN!,
     },
   ],
-
   preview: true,
 });
 
-// Fonction pour enregistrer automatiquement les composants de plasmic library
+// Enregistrement des composants Plasmic-library
 function registerComponents(library: Record<string, any>) {
   for (const key of Object.keys(library)) {
     if (!key.includes("Meta")) {
@@ -35,7 +34,6 @@ function registerComponents(library: Record<string, any>) {
     }
   }
 }
-
 registerComponents(PlasmicLibrary);
 
 //Register global context

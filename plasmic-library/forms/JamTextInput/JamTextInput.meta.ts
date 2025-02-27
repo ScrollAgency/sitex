@@ -1,6 +1,6 @@
 const JamTextInputMeta = {
     name: "JamTextInput",
-    section: "Scroll Jam",
+    section: "Jam (Scroll)",
     displayName: "Jam Text input",
     description: "Text input used in Job Around Me project",
     thumbnailUrl: "https://static1.plasmic.app/insertables/input.svg",

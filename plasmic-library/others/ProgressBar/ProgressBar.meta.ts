@@ -1,6 +1,6 @@
 const ProgressBarMeta = {
   name: "ProgressBar",
-  section: "Scroll Test",
+  section: "Test (Scroll)",
   displayName: "Progress bar",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/slider.svg",

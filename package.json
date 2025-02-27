@@ -12,8 +12,9 @@
   "dependencies": {
     "@plasmicapp/loader-nextjs": "^1.0.415",
     "@plasmicapp/react-web": "^0.2.374",
-    "@ScrollAgency/plasmic-library": "^0.4.7",
+    "@ScrollAgency/plasmic-library": "^0.6.1",
     "autoprefixer": "^10.4.20",
+    "mapbox-gl": "^3.10.0",
     "next": "^14.2.23",
     "next-utils": "^0.2.1",
     "plasmic-supabase": "^0.4.1",

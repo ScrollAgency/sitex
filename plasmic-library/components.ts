@@ -16,6 +16,9 @@ export { default as CardComplexMeta } from "./cards/CardComplex/CardComplex.meta
 //       HeroCard
 export { default as HeroCard } from "./cards/HeroCard/HeroCard";
 export { default as HeroCardMeta } from "./cards/HeroCard/HeroCard.meta";
+//       Map
+export { default as Map } from "./others/Map/Map";
+export { default as MapMeta } from "./others/Map/Map.meta";
 
 // Forms
 //       Checkbox

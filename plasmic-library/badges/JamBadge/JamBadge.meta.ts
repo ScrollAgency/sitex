@@ -1,6 +1,6 @@
 const JamBadgeMeta = {
   name: "JamBadge",
-  section: "Scroll Test",
+  section: "Jam (Scroll)",
   displayName: "Badge JAM",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/popover.svg",

@@ -1,6 +1,6 @@
 const CardSimpleMeta = {
     name: "CardSimple",
-    section: "Scroll Test",
+    section: "Test (Scroll)",
   displayName: "Card simple",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/modal.svg",

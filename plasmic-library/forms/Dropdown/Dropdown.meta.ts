@@ -1,6 +1,6 @@
 const DropdownMeta = {
   name: "Dropdown",
-  section: "Scroll Test",
+  section: "Test (Scroll)",
   displayName: "Dropdown",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/select.svg",

@@ -1,6 +1,6 @@
 const ToastMeta = {
   name: "Toast",
-  section: "Scroll Test",
+  section: "Test (Scroll)",
   displayName: "Toast",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/text.svg",

@@ -17,8 +17,8 @@
 | PasswordCheckIndicator         | 0.0.1                | 0.0.1                | ✅ À jour               |
 | Toast                          | 0.0.1                | 0.0.1                | ✅ À jour               |
 | Checkbox                       | 0.0.1                | 0.0.1                | ✅ À jour               |
-| ButtonApple                    | N/A                  | 0.0.1                | 🗑 Composant local uniquement |
 | JamButton                      | 0.0.1                | 0.0.1                | ✅ À jour               |
+| Map                            | 0.0.4                | 0.0.4                | ✅ À jour               |
 | FileUploader                   | 0.0.1                | 0.0.1                | ✅ À jour               |
 | JamTextInput                   | 0.0.1                | 0.0.1                | ✅ À jour               |
 | SitexForm                      | 0.0.1                | 0.0.1                | ✅ À jour               |
@@ -27,5 +27,4 @@
 
 📍 Résultats de la comparaison :
 
-🛠️  Nouveaux composants (locaux mais absents en distant) :
-- ButtonApple (0.0.1)
+✅ Les versions locales de vos composants sont à jour !

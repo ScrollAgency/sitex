@@ -1,6 +1,6 @@
 const ToggleMeta = {
   name: "Toggle",
-  section: "Scroll Test",
+  section: "Test (Scroll)",
   displayName: "Toggle",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/switch.svg",

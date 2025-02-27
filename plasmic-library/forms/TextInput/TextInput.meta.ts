@@ -1,6 +1,6 @@
 const TextInputMeta = {
   name: "TextInput",
-  section: "Scroll Test",
+  section: "Test (Scroll)",
   displayName: "Texte input",
   description: "Description de cette belle carte",
   thumbnailUrl: "https://static1.plasmic.app/insertables/input.svg",

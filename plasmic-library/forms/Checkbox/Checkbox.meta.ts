@@ -1,6 +1,6 @@
 const CheckboxMeta = {
     name: "Checkbox",
-    section: "Scroll Test",
+    section: "Test (Scroll)",
     displayName: "Checkbox",
     description: "Description de cette belle carte",
     thumbnailUrl: "https://static1.plasmic.app/insertables/checkbox.svg",

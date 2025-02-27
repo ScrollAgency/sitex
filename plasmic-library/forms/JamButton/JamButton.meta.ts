@@ -1,6 +1,6 @@
 const JamButtonMeta = {
     name: "JamButton",
-    section: "Scroll Jam",
+    section: "Jam (Scroll)",
     displayName: "Jam Button",
     description: "Button used in Job Around Me project",
     thumbnailUrl: "https://static1.plasmic.app/insertables/button.svg",

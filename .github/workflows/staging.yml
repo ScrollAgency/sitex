@@ -213,9 +213,9 @@ jobs:
       - name: Deploy to Staging
         run: |
           ssh  -o StrictHostKeyChecking=no -T ubuntu@${{ secrets.SERVER_IP }} "
-            cd sitex/staging &&
-            docker compose -f docker-compose.staging.yml pull &&
-            docker compose -f docker-compose.staging.yml up -d
+            cd ${{ env.myapp }}/${{ env.environnement }} &&
+            docker compose -f docker-compose.${{ env.environnement }}.yml pull &&
+            docker compose -f docker-compose.${{ env.environnement }}.yml up -d
           "
 
       # Étape 24 : Nettoyer le serveur Docker
